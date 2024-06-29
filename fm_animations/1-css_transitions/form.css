@@ -1,0 +1,127 @@
+:root {
+    --input-bg-color: white;
+    --input-bd-color: whitesmoke;
+    --input-text-color: rgb(0, 136, 255);
+    --input-focus-outline-color: violet;
+    --input-invalid-color: red;
+    --input-invalid-text-color: white;
+    --input-valid-color: aquamarine;
+    --input-btn-bg-color: rgb(0, 155, 104);
+    --label-color: white;
+}
+
+
+.container--form {
+    background: #350e57;
+}
+
+/* Form container to control the layout */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* A form label style */
+.form-label {
+    cursor: pointer;
+}
+
+/* Form input that represent an input tag */
+.form-input {
+    display: block;
+    padding: 0.5rem;
+
+    border: 2px solid var(--input-bd-color);
+    border-radius: 0.8rem;
+    outline-color: initial;
+
+    background: var(--input-bg-color);
+
+    color: var(--input-text-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    transition: all 400ms;
+}
+
+/* Styling the  */
+.form-input--btn {
+    padding: 8px;
+
+    border-radius: 4px;
+
+    background-color: transparent;
+
+    font-size: medium;
+    cursor: pointer;
+}
+
+.form-input--btn:hover {
+    background-color: var(--input-btn-bg-color);
+    color: azure;
+}
+
+/* Set an ouline color for a focused input */
+.form-input:focus {
+    border: none;
+    outline-color: var(--input-focus-outline-color);
+}
+
+/* Set an ouline color for an invalid input */
+.form-input:invalid {
+    outline-color: var(--input-invalid-color);
+}
+
+/* Set the backgroud and text color for an invalid input when it loses focus */
+.form-input:not(:focus):invalid {
+    background: var(--input-invalid-color);
+    color: var(--input-invalid-text-color);
+}
+
+/* Set the backgroud color for a valid input when it loses focus */
+.form-input:not(:focus):valid:not(.form-input--btn) {
+    background: var(--input-valid-color);
+}
+
+/* Style of the form elements control(the wrapper of an input and its label) */
+.form-control {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    color: var(--label-color);
+    font-size: larger;
+}
+
+.form-control--btns {
+    width: 100%;
+}
+
+/* Cover an input with the pseudo element after if is an ancestor is invalid */
+.form-control:has(.form-input:invalid) ~ .form-control::after {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: transparent;
+
+    content: "";
+    transition: opacity 500ms;
+}
+
+/* Show an input control(wrapper -> label + input) if the ancestor is valid */
+.form-control:has(.form-input:valid) + .form-control {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+
+/* Hide an input control(wrapper) if an ancestor is invalid */
+/* This style should be set after the "showing" style to overwrite it */
+.form-control:has(.form-input:invalid) ~ .form-control {
+    opacity: 0;
+    transition: opacity 500ms;
+}
